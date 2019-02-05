@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="app.css">
+    <title>Document</title>
+</head>
+
+<body onload="init()">
+    <div class="wrapper">
+        <p>Click, touch, or tap</p>
+        <table>
+            <tr>
+                <td style="vertical-align:top; width:30%;">
+                    <div id="dvMouseStatus"></div>
+                </td>
+                <td style="vertical-align:top; width:40%;">
+                    <div id="dvPointerStatus"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        function MouseDownResponse(event) {
+            document.getElementById("dvMouseStatus").innerHTML += "Mouse Down<br />";
+        }
+
+        function MouseUpResponse(event) {
+            document.getElementById("dvMouseStatus").innerHTML += "Mouse Up<br />";
+        }
+
+        function PointerDownResponse(event) {
+            document.getElementById("dvPointerStatus").innerHTML +=
+                "PointerId:" + event.pointerId +
+                " of pointerType:" + event.pointerType + " Down<br />";
+        }
+
+        function PointerUpResponse(event) {
+            document.getElementById("dvPointerStatus").innerHTML +=
+                "PointerId:" + event.pointerId +
+                " of pointerType:" + event.pointerType + " Up<br />";
+        }
+
+        function init() {
+            document.addEventListener("mousedown", MouseDownResponse, false);
+            document.addEventListener("mouseup", MouseUpResponse, false);
+
+            document.addEventListener("pointerdown", PointerDownResponse, false);
+            document.addEventListener("pointerup", PointerUpResponse, false);
+
+            // Support for prefixed IE10 implementation
+            document.addEventListener("MSPointerDown", PointerDownResponse, false);
+            document.addEventListener("MSPointerUp", PointerUpResponse, false);
+        }
+    </script>
+</body>
+
+</html>
