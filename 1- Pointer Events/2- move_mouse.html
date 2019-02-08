@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/js.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/app.css">
+    <title>Document</title>
+</head>
+
+<body onload="init()" style="touch-action:none; -ms-touch-action:none;">
+    <!-- Move -->
+    <div class="wrapper">
+        <p>Move your mouse, finger, or pen</p>
+        <table>
+            <tr>
+                <td style="vertical-align:top; width:30%;">
+                    <div id="dvMouseStatus"></div>
+                </td>
+                <td style="vertical-align:top; width:40%;">
+                    <div id="dvPointerStatus"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        function MouseMoveResponse(event) {
+            document.getElementById("dvMouseStatus").innerHTML =
+                "Mouse position: " + event.clientX + ", " + event.clientY + "<br />";
+        }
+
+        function PointerMoveResponse(event) {
+            document.getElementById("dvPointerStatus").innerHTML =
+                "PointerId:" + event.pointerId + " of pointerType:" + event.pointerType +
+                " isPrimary:" + event.isPrimary +
+                " position: " + event.clientX + ", " + event.clientY + "<br />";
+        }
+
+        function init() {
+            document.addEventListener("mousemove", MouseMoveResponse, false);
+            document.addEventListener("pointermove", PointerMoveResponse, false);
+
+            // Support for prefixed IE10 implementation
+            document.addEventListener("MSPointerMove", PointerMoveResponse, false);
+        }
+    </script>
+
+</body>
+
+</html>
